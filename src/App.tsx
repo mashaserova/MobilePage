@@ -11,13 +11,16 @@ import {
   Radio,
   RadioGroup,
   FormControlLabel,
-  Checkbox
+  Checkbox,
+  IconButton
 } from '@mui/material';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
 import theme from './theme';
 import { VolumeInput } from '../src/components/VolumeInput';
 import { DetailRow } from '../src/components/DetailRow';
+import CustomCheckboxIcon from './components/customCheckboxIcon';
 
 const yellowControlStyles = {
     color: '#1D1D1F',
@@ -101,29 +104,53 @@ function App() {
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
              <Typography variant="h6">Реквизиты</Typography>
              <FormControlLabel 
-                control={<Checkbox defaultChecked sx={yellowControlStyles} />} 
+                control={
+                  <Checkbox 
+                    defaultChecked
+                    sx={{color: '#8E8E93', '&.Mui-checked': { color: '#FFD600' }}}
+                    checkedIcon={<CustomCheckboxIcon />} 
+                  />} 
                 label={<Typography variant="caption" sx={{ fontSize: '14px' }}>Сохранить реквизиты</Typography>} 
                 labelPlacement="start"
                 sx={{ ml: 0, mr: 0 }}
              />
         </Box>
 
-        <Paper sx={{ p: '2px 16px', mb: 2 }}>
-            <RadioGroup row defaultValue="card" name="req-type-group">
-                <FormControlLabel 
-                    value="card" 
-                    control={<Radio sx={yellowControlStyles} />} 
-                    label={<Typography sx={{ fontSize: '14px', fontWeight: 500 }}>Номер карты</Typography>} 
-                />
-                <FormControlLabel 
-                    value="contract" 
-                    control={<Radio sx={yellowControlStyles} />} 
-                    label={<Typography sx={{ fontSize: '14px' }}>Номер договора</Typography>} 
-                />
-            </RadioGroup>
-        </Paper>
+        <Paper sx={{ mb: 2, borderRadius: '16px', overflow: 'hidden' }}>
+  
+        <Box sx={{ px: 2, pt: 2, pb: 1 }}>
+          <RadioGroup row defaultValue="card" name="req-type-group">
+            <FormControlLabel 
+                value="card" 
+                control={<Radio sx={yellowControlStyles} />} 
+                label={<Typography sx={{ fontSize: '14px', fontWeight: 500 }}>Номер карты</Typography>} 
+            />
+            <FormControlLabel 
+                value="contract" 
+                control={<Radio sx={yellowControlStyles} />} 
+                label={<Typography sx={{ fontSize: '14px' }}>Номер договора</Typography>} 
+            />
+          </RadioGroup>
+        </Box>
 
-        <DetailRow label="Номер карты" value="" />
+        <Box sx={{ 
+            px: 2, 
+            pb: 2, 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'space-between' 
+        }}>
+          <Box>
+            <Typography sx={{ fontSize: '18px', fontWeight: 500, color: '#1D1D1F' }}>
+              Номер карты
+            </Typography>
+          </Box>
+          <IconButton edge="end">
+            <EditOutlinedIcon sx={{ color: '#1D1D1F' }} />
+          </IconButton>
+        </Box>
+
+      </Paper>
         <DetailRow label="ФИО владельца" value="" />
         <DetailRow label="Адрес" value="" />
 
